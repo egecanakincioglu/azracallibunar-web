@@ -1,0 +1,19 @@
+# Turn on the rewrite engine
+RewriteEngine On
+
+# Redirect requests for 'contact' to 'contact.php'
+RewriteRule ^contact$ contact.php [L]
+
+# Redirect requests for 'services/MailSender' to 'services/MailSender.php'
+RewriteRule ^services/MailSender$ services/MailSender.php [L]
+
+# Remove .php extension from URL
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Remove .html extension from URL
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Fallback for handling 404 errors by displaying a custom 404 page
+ErrorDocument 404 /src/services/404.php
